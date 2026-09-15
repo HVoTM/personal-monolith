@@ -1,0 +1,184 @@
+:root {
+  --card-bg: rgba(18, 18, 22, 0.78);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --control-bg: rgba(255, 255, 255, 0.1);
+  --control-bg-hover: rgba(255, 255, 255, 0.22);
+  --text: #f4f1ea;
+  --muted: rgba(244, 241, 234, 0.6);
+  --accent: #e8b86d;
+  --error: #ff8a80;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--text);
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+}
+
+/* The whole card drags the frameless window; controls opt out below. */
+.card {
+  --wails-draggable: drag;
+  position: relative;
+  height: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--card-bg);
+}
+
+button,
+input,
+textarea {
+  --wails-draggable: no-drag;
+  font: inherit;
+  color: inherit;
+}
+
+/* Quote view */
+
+#quote-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.label {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+blockquote {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.author {
+  margin: auto 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.toolbar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.card:hover .toolbar,
+.toolbar:focus-within {
+  opacity: 1;
+}
+
+.toolbar button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--control-bg);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--control-bg-hover);
+}
+
+/* Add view */
+
+#add-view {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+textarea,
+input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  outline: none;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  user-select: text;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--accent);
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.row button {
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--control-bg);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.row button:hover {
+  background: var(--control-bg-hover);
+}
+
+.row button.primary {
+  background: var(--accent);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  color: var(--error);
+  font-size: 11px;
+}
+
+.error:empty {
+  display: none;
+}

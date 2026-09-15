@@ -30,3 +30,7 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Wails build output and generated JS bindings
+apps/quote-widget/build/bin/
+apps/quote-widget/frontend/wailsjs/

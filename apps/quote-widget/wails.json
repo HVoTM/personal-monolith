@@ -1,0 +1,10 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "quote-widget",
+  "outputfilename": "quote-widget",
+  "frontend:install": "",
+  "frontend:build": "",
+  "author": {
+    "name": "HVoTM"
+  }
+}

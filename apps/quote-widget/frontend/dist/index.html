@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quote of the Day</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <section id="quote-view">
+      <div class="toolbar">
+        <button id="add-btn" title="Add a quote" aria-label="Add a quote">+</button>
+        <button id="shuffle-btn" title="Another quote" aria-label="Another quote">⟳</button>
+        <button id="quit-btn" title="Quit" aria-label="Quit">✕</button>
+      </div>
+      <p class="label">Quote of the day</p>
+      <blockquote id="quote-text"></blockquote>
+      <p id="quote-author" class="author"></p>
+    </section>
+
+    <form id="add-view" hidden>
+      <textarea id="text-input" maxlength="500" placeholder="A sentence you like…" required></textarea>
+      <div class="row">
+        <input id="author-input" type="text" maxlength="80" placeholder="Author (optional)">
+        <button type="button" id="cancel-btn">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+    </form>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
