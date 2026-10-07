@@ -38,6 +38,15 @@ apps/quote-widget/frontend/wailsjs/
 # Recommender: downloaded datasets, exported models, Python env
 apps/recommender/data/
 apps/recommender/model/
-.venv/
+
+# Python
 __pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
 .ipynb_checkpoints/
+*.egg-info/
+
+# fft: rendered audio and downloaded reference clips
+apps/fft/out/
+apps/fft/refs/

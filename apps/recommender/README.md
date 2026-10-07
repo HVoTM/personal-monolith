@@ -18,7 +18,7 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r training/requirements.txt
 python training/download_data.py      # → data/raw/ml-latest-small/
-jupyter lab training/notebooks/00_explore.ipynb
+jupyter lab training/notebooks/            # 00_explore, 01_baselines, ...
 ```
 
 ## Roadmap
@@ -49,6 +49,7 @@ GET  /movies/{id}/similar?k=10         → nearest neighbours in embedding space
 ```
 recommender/
   training/   # Python: notebooks, TF models, eval, export script
+    recsys/   #   shared code: data loading + split, evaluation harness, models
   model/      # exported embeddings + id maps (gitignored)
   server/     # API
 ```

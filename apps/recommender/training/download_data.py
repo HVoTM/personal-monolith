@@ -14,6 +14,15 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+try:
+    # Verify TLS with the OS certificate store. On Windows, Python's default store only has
+    # roots already installed locally and fails on servers whose root Windows fetches on demand.
+    import truststore
+
+    truststore.inject_into_ssl()
+except ImportError:
+    pass
+
 DATASET = "ml-latest-small"
 URL = f"https://files.grouplens.org/datasets/movielens/{DATASET}.zip"
 MD5_URL = URL + ".md5"
@@ -23,8 +32,14 @@ EXPECTED_FILES = ["ratings.csv", "movies.csv", "tags.csv", "links.csv"]
 
 
 def md5sum(path: Path) -> str:
+    """
+    32-character hex fingerprint of its bytes
+    """
+    # Start empty hasher
     h = hashlib.md5()
+    # Binary mode opening
     with path.open("rb") as f:
+        # Keep calling f.read in chunk for fixed-size memory, 1MiB at a time
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
@@ -47,15 +62,21 @@ def fetch_expected_md5() -> str | None:
 
 def safe_extract(zip_path: Path, dest: Path) -> None:
     """Extract, refusing any member that would land outside dest."""
+
+    # Resolve dest to an absolute path
     dest = dest.resolve()
+    ## Build where the file would land
     with zipfile.ZipFile(zip_path) as zf:
         for member in zf.infolist():
             target = (dest / member.filename).resolve()
             if not target.is_relative_to(dest):
                 raise RuntimeError(f"unsafe path in archive: {member.filename}")
+        # entry passes -> extract all
         zf.extractall(dest)
 
-
+"""
+Download MovieLens file
+"""
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--force", action="store_true", help="re-download even if present")
