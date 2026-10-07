@@ -1,0 +1,5 @@
+# Phase 0: data exploration. TensorFlow gets added in phase 3.
+numpy
+pandas
+matplotlib
+jupyterlab

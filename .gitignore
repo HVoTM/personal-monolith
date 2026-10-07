@@ -34,3 +34,10 @@ go.work.sum
 # Wails build output and generated JS bindings
 apps/quote-widget/build/bin/
 apps/quote-widget/frontend/wailsjs/
+
+# Recommender: downloaded datasets, exported models, Python env
+apps/recommender/data/
+apps/recommender/model/
+.venv/
+__pycache__/
+.ipynb_checkpoints/
