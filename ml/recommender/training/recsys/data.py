@@ -21,6 +21,22 @@ def load_movies(data_dir: Path = DATA_DIR) -> pd.DataFrame:
     return pd.read_csv(data_dir / "movies.csv")
 
 
+def load_tags(data_dir: Path = DATA_DIR) -> pd.DataFrame:
+    """Columns: userId, movieId, tag (free text), timestamp."""
+    return pd.read_csv(data_dir / "tags.csv")
+
+
+def drop_pairs(df: pd.DataFrame, *heldout: pd.DataFrame) -> pd.DataFrame:
+    """Rows of df whose (userId, movieId) pair isn't in any heldout frame.
+
+    Used on tags: a user who tagged a movie has seen it. Keeping tags for held-out ratings
+    would let movie features carry a trace of the answers we're testing against.
+    """
+    pairs = pd.concat([h[["userId", "movieId"]] for h in heldout]).drop_duplicates()
+    merged = df.merge(pairs, on=["userId", "movieId"], how="left", indicator=True)
+    return merged[merged["_merge"] == "left_only"].drop(columns="_merge").reset_index(drop=True)
+
+
 def time_split(
     ratings: pd.DataFrame, val_frac: float = 0.1, test_frac: float = 0.1
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:

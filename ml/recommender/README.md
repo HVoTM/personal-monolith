@@ -13,7 +13,7 @@ See [CONCEPTS.md](CONCEPTS.md) for the background theory.
 Requires Python 3.12 (TensorFlow, added in phase 3, doesn't support every new Python release right away).
 
 ```powershell
-cd apps/recommender
+cd ml/recommender
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r training/requirements.txt

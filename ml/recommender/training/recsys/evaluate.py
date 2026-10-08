@@ -12,6 +12,10 @@ import pandas as pd
 
 
 def rmse(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    """
+    Calculate and evaluate RMSE (root-mean-square error) metric
+    of a prediction
+    """
     return float(np.sqrt(np.mean((np.asarray(y_true) - np.asarray(y_pred)) ** 2)))
 
 
@@ -49,7 +53,7 @@ def evaluate(
 
     # NDCG: a hit at rank r is worth 1/log2(r+1); divide by the best achievable score.
     discount = 1.0 / np.log2(np.arange(2, k + 2))
-    dcg = hits @ discount
+    dcg = hits @ discount # reminder: @ is matrix multiplication operator (equivalent to np.matmul(a, b))
     idcg = np.cumsum(discount)[np.minimum(n_rel, k) - 1]
 
     results[f"recall@{k}"] = float(np.mean(hits.sum(axis=1) / n_rel))

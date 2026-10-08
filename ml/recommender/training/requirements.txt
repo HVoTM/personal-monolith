@@ -1,6 +1,7 @@
 # Phases 0-2. TensorFlow gets added in phase 3.
 numpy
 pandas
+scipy       # sparse matrices for TF-IDF (phase 2)
 matplotlib
 jupyterlab
 truststore  # lets download_data.py verify HTTPS against the Windows certificate store

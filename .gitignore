@@ -36,8 +36,8 @@ apps/quote-widget/build/bin/
 apps/quote-widget/frontend/wailsjs/
 
 # Recommender: downloaded datasets, exported models, Python env
-apps/recommender/data/
-apps/recommender/model/
+ml/recommender/data/
+ml/recommender/model/
 
 # Python
 __pycache__/
